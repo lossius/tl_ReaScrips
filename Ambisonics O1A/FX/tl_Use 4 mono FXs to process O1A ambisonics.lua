@@ -248,6 +248,13 @@ function tl_AmbiProcess4ChannelsUsingFourMonoFXs()
   local fxName
   retval, fxName = reaper.TrackFX_GetFXName( track, fx, "")
   
+  -- Check for number of channels, temrinate if there are to few
+  local numChannels = reaper.GetMediaTrackInfo_Value(track, "I_NCHAN")
+  if numChannels < 4 then 
+    reaper.ShowConsoleMsg("Error: Track has insufficient number of channels.\n")
+    return
+  end
+  
   -- ChunkStart varies depending on plugin type (VST, VST3, AU, JS)
   local chunkStart, chunkEnd, fxType = getChunkWrapFromPluginType( fxName )
   
