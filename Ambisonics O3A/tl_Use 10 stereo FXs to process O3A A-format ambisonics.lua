@@ -1,4 +1,4 @@
--- @description Set up two instances of stereo FX to process channels 1-4
+-- @description Set up ten instances of stereo FX to process channels 1-20
 -- @version 1.0
 -- @author Trond Lossius
 -- @website http://www.trondlossius.no
@@ -6,15 +6,16 @@
 -- @changelog
 --    #header
 
---[[ @details Utility for FX processing of first order ambisonics using two stereo FXs
+--[[ @details Utility for FX processing of third order ambisonics using ten stereo FXs.
+    Intended for use with 3rd order 20-channel A-format signals (converted using Blue Ripple plugins)
 
-  1) If the next FX in the chain has the same name, it is deleted
-  2) A new plugin is instantiated as a copy of the currently selected one
-  3) This will also copy all current parameter settings
-  4) All parameters of second instance are linked to the parameters of the first
-  5) Input and output pins are set so that
+  1) A new plugin is instantiated as a copy of the currently selected one
+  2) This will also copy all current parameter settings
+  3) All parameters of second instance are linked to the parameters of the first
+  4) Input and output pins are set so that
       - 1st FX instance processes channels 1-2
       - 2nd FX instance processes channels 3-4
+        etc.
 
   Big kudos to MPL and Ulstraschall for scripts and documentation that helped me patch this together
 ]]
@@ -276,8 +277,6 @@ function tl_AmbiProcess20ChannelsUsing10StereoFXs()
     local FXchunkAppend   = ModNewFxChunk( FXchunk, fxGUID, true,   track, fx, true,   fxType, numParams, link_strFX )
     NewFXchunk = NewFXchunk..'\n'..FXchunkAppend
   end
-  
-  reaper.ShowConsoleMsg("Chunk :\n"..NewFXchunk.."\n\n")
   
   TrackChunk = TrackChunk:gsub( literalize( FXchunk ), NewFXchunk )
   reaper.SetTrackStateChunk( track, TrackChunk , true )

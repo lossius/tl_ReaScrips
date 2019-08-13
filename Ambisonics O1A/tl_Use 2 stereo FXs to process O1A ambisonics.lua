@@ -8,11 +8,10 @@
 
 --[[ @details Utility for FX processing of first order ambisonics using two stereo FXs
 
-  1) If the next FX in the chain has the same name, it is deleted
-  2) A new plugin is instantiated as a copy of the currently selected one
-  3) This will also copy all current parameter settings
-  4) All parameters of second instance are linked to the parameters of the first
-  5) Input and output pins are set so that
+  1) A new plugin is instantiated as a copy of the currently selected one
+  2) This will also copy all current parameter settings
+  3) All parameters of second instance are linked to the parameters of the first
+  4) Input and output pins are set so that
       - 1st FX instance processes channels 1-2
       - 2nd FX instance processes channels 3-4
 
